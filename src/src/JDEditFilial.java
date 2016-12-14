@@ -222,6 +222,7 @@ public class JDEditFilial extends javax.swing.JDialog {
     private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
         // TODO add your handling code here:
         this.dispose();
+        ////
     }//GEN-LAST:event_jButtonSairActionPerformed
 
     private void jTableFilialMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableFilialMouseClicked
