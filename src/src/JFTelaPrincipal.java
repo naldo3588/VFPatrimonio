@@ -5,6 +5,7 @@
  */
 package src;
 
+import src.JDs.JDCadFilial;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
@@ -35,6 +36,7 @@ public class JFTelaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuItem1 = new javax.swing.JMenuItem();
         jButtonSair = new javax.swing.JButton();
         jMenu = new javax.swing.JMenuBar();
         jMenuCadastros = new javax.swing.JMenu();
@@ -42,7 +44,10 @@ public class JFTelaPrincipal extends javax.swing.JFrame {
         jMenuItemEquipamentos = new javax.swing.JMenuItem();
         jMenuItemFiliais = new javax.swing.JMenuItem();
 
+        jMenuItem1.setText("jMenuItem1");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Menu Principal");
 
         jButtonSair.setText("Sair");
         jButtonSair.addActionListener(new java.awt.event.ActionListener() {
@@ -54,8 +59,8 @@ public class JFTelaPrincipal extends javax.swing.JFrame {
         jMenuCadastros.setBorder(new javax.swing.border.MatteBorder(null));
         jMenuCadastros.setText("Cadastros");
         jMenuCadastros.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jMenuCadastros.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
+        jMenuItemDepartamentos.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jMenuItemDepartamentos.setText("Departamentos");
         jMenuItemDepartamentos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -64,6 +69,7 @@ public class JFTelaPrincipal extends javax.swing.JFrame {
         });
         jMenuCadastros.add(jMenuItemDepartamentos);
 
+        jMenuItemEquipamentos.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jMenuItemEquipamentos.setText("Equipamentos");
         jMenuItemEquipamentos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -72,6 +78,7 @@ public class JFTelaPrincipal extends javax.swing.JFrame {
         });
         jMenuCadastros.add(jMenuItemEquipamentos);
 
+        jMenuItemFiliais.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jMenuItemFiliais.setText("Filiais");
         jMenuItemFiliais.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -89,27 +96,20 @@ public class JFTelaPrincipal extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(909, Short.MAX_VALUE)
+                .addContainerGap(459, Short.MAX_VALUE)
                 .addComponent(jButtonSair)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(572, Short.MAX_VALUE)
+                .addContainerGap(321, Short.MAX_VALUE)
                 .addComponent(jButtonSair)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jMenuItemDepartamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDepartamentosActionPerformed
-        // TODO add your handling code here:
-        JDCadDepartamento departamento = new JDCadDepartamento(null, rootPaneCheckingEnabled);
-        departamento.setLocationRelativeTo(null);
-        departamento.setVisible(true);
-    }//GEN-LAST:event_jMenuItemDepartamentosActionPerformed
 
     private void jMenuItemEquipamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemEquipamentosActionPerformed
         // TODO add your handling code here:
@@ -120,7 +120,7 @@ public class JFTelaPrincipal extends javax.swing.JFrame {
 
     private void jMenuItemFiliaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemFiliaisActionPerformed
         // TODO add your handling code here:
-        JDCadFilial filial = new JDCadFilial(null, rootPaneCheckingEnabled);
+        JFCadFilial filial = new JFCadFilial();
         filial.setLocationRelativeTo(null);
         filial.setVisible(true);
     }//GEN-LAST:event_jMenuItemFiliaisActionPerformed
@@ -129,6 +129,13 @@ public class JFTelaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_jButtonSairActionPerformed
+
+    private void jMenuItemDepartamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDepartamentosActionPerformed
+        // TODO add your handling code here:
+        JDCadDepartamento departamento = new JDCadDepartamento(null, rootPaneCheckingEnabled);
+        departamento.setLocationRelativeTo(null);
+        departamento.setVisible(true);
+    }//GEN-LAST:event_jMenuItemDepartamentosActionPerformed
 
     public void lookandfell() {
         try {
@@ -179,6 +186,7 @@ public class JFTelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jButtonSair;
     private javax.swing.JMenuBar jMenu;
     private javax.swing.JMenu jMenuCadastros;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItemDepartamentos;
     private javax.swing.JMenuItem jMenuItemEquipamentos;
     private javax.swing.JMenuItem jMenuItemFiliais;

@@ -5,6 +5,7 @@
  */
 package src;
 
+import src.JDs.JDCadFilial;
 import bean.EquipamentoBean;
 import dao.EquipamentoDAO;
 import javax.swing.JOptionPane;

@@ -9,31 +9,28 @@ import bean.FilialBean;
 import factory.ConexaoFactory;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author ronaldo.pedro
  */
-public class JDEditFilial extends javax.swing.JDialog {
+public class JFEditFilial extends javax.swing.JFrame {
 
+    JFCadFilial jFCadFilial;
     private java.sql.Connection con;
     private java.sql.Statement stmtListar;
     private java.sql.ResultSet rsListar;
     String look_and_fell = ("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
 
     /**
-     * Creates new form JDEditFilial
+     * Creates new form JFEditFilial
      */
-    public JDEditFilial(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public JFEditFilial() {
         initComponents();
         jRadioButtonNaoExato.setSelected(true);
         jComboBoxPesquisar.setSelectedItem("Cidade");
         jTextFieldBuscar.requestFocus();
-        lookandfell();
     }
 
     /**
@@ -45,24 +42,38 @@ public class JDEditFilial extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
+        jRadioButtonExato = new javax.swing.JRadioButton();
+        jRadioButtonNaoExato = new javax.swing.JRadioButton();
+        jTextFieldID = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
         jComboBoxPesquisar = new javax.swing.JComboBox<>();
+        jButtonSetar = new javax.swing.JButton();
         jTextFieldBuscar = new javax.swing.JTextField();
         jButtonPesquisar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableFilial = new javax.swing.JTable();
         jButtonSair = new javax.swing.JButton();
         jButtonLimparPesq = new javax.swing.JButton();
-        jRadioButtonExato = new javax.swing.JRadioButton();
-        jRadioButtonNaoExato = new javax.swing.JRadioButton();
-        jTextFieldID = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jButtonSetar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Consulta de Filiais");
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Consulta Filiais Cadastradas");
+
+        jRadioButtonExato.setText("Exato");
+
+        jRadioButtonNaoExato.setText("Não Exato");
+
+        jTextFieldID.setEditable(false);
+
+        jLabel1.setText("ID:");
 
         jComboBoxPesquisar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Cidade", "CNPJ" }));
+
+        jButtonSetar.setText("Setar");
+        jButtonSetar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSetarActionPerformed(evt);
+            }
+        });
 
         jButtonPesquisar.setText("Buscar");
         jButtonPesquisar.addActionListener(new java.awt.event.ActionListener() {
@@ -93,12 +104,6 @@ public class JDEditFilial extends javax.swing.JDialog {
             }
         });
         jScrollPane1.setViewportView(jTableFilial);
-        if (jTableFilial.getColumnModel().getColumnCount() > 0) {
-            jTableFilial.getColumnModel().getColumn(0).setResizable(false);
-            jTableFilial.getColumnModel().getColumn(0).setPreferredWidth(10);
-            jTableFilial.getColumnModel().getColumn(10).setResizable(false);
-            jTableFilial.getColumnModel().getColumn(10).setPreferredWidth(10);
-        }
 
         jButtonSair.setText("Sair");
         jButtonSair.addActionListener(new java.awt.event.ActionListener() {
@@ -114,18 +119,6 @@ public class JDEditFilial extends javax.swing.JDialog {
             }
         });
 
-        buttonGroup1.add(jRadioButtonExato);
-        jRadioButtonExato.setText("Exato");
-
-        buttonGroup1.add(jRadioButtonNaoExato);
-        jRadioButtonNaoExato.setText("Não Exato");
-
-        jTextFieldID.setEditable(false);
-
-        jLabel1.setText("ID:");
-
-        jButtonSetar.setText("Setar");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -133,31 +126,32 @@ public class JDEditFilial extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButtonLimparPesq)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonSair))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jComboBoxPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButtonPesquisar)
-                                .addGap(55, 55, 55)
-                                .addComponent(jRadioButtonExato)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jRadioButtonNaoExato))
+                            .addComponent(jScrollPane1)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jButtonLimparPesq)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButtonSair))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jTextFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButtonSetar)))
-                        .addGap(0, 297, Short.MAX_VALUE)))
-                .addContainerGap())
+                                .addComponent(jButtonSetar)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jComboBoxPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonPesquisar)
+                        .addGap(55, 55, 55)
+                        .addComponent(jRadioButtonExato)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jRadioButtonNaoExato)
+                        .addGap(115, 190, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -186,6 +180,16 @@ public class JDEditFilial extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButtonSetarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSetarActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+
+        jFCadFilial = new JFCadFilial();
+        jFCadFilial.setVisible(true);
+        jFCadFilial.recebendo(jTextFieldID.getText());
+        jFCadFilial.setLocationRelativeTo(null);
+    }//GEN-LAST:event_jButtonSetarActionPerformed
+
     private void jButtonPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisarActionPerformed
         // TODO add your handling code here:
         if (jComboBoxPesquisar.getSelectedItem().toString().equals("Cidade") && jRadioButtonNaoExato.isSelected()) {
@@ -210,6 +214,19 @@ public class JDEditFilial extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jButtonPesquisarActionPerformed
 
+    private void jTableFilialMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableFilialMouseClicked
+        // TODO add your handling code here:
+        clickMouse();
+    }//GEN-LAST:event_jTableFilialMouseClicked
+
+    private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        JFCadFilial filial = new JFCadFilial();
+        filial.setLocationRelativeTo(null);
+        filial.setVisible(true);
+    }//GEN-LAST:event_jButtonSairActionPerformed
+
     private void jButtonLimparPesqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLimparPesqActionPerformed
         // TODO add your handling code here:
         ((DefaultTableModel) jTableFilial.getModel()).setNumRows(0);
@@ -218,18 +235,6 @@ public class JDEditFilial extends javax.swing.JDialog {
         jTextFieldID.setText("");
         jTextFieldBuscar.requestFocus();
     }//GEN-LAST:event_jButtonLimparPesqActionPerformed
-
-    private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
-        // TODO add your handling code here:
-        this.dispose();
-        ////
-    }//GEN-LAST:event_jButtonSairActionPerformed
-
-    private void jTableFilialMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableFilialMouseClicked
-        // TODO add your handling code here:
-        clickMouse();
-
-    }//GEN-LAST:event_jTableFilialMouseClicked
 
     private void buscarCidadeLike() {
         try {
@@ -358,16 +363,6 @@ public class JDEditFilial extends javax.swing.JDialog {
         }
     }
 
-    public void lookandfell() {
-        try {
-
-            UIManager.setLookAndFeel(look_and_fell);
-            SwingUtilities.updateComponentTreeUI(this);
-        } catch (Exception erro) {
-            JOptionPane.showMessageDialog(null, "Erro ao alterar o tema = " + erro);
-        }
-    }
-
     /**
      * @param args the command line arguments
      */
@@ -385,33 +380,25 @@ public class JDEditFilial extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JDEditFilial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFEditFilial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JDEditFilial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFEditFilial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JDEditFilial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFEditFilial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JDEditFilial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFEditFilial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
-        /* Create and display the dialog */
+        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JDEditFilial dialog = new JDEditFilial(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
+                new JFEditFilial().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButtonLimparPesq;
     private javax.swing.JButton jButtonPesquisar;
     private javax.swing.JButton jButtonSair;
