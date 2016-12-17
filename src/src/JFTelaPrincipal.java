@@ -5,7 +5,6 @@
  */
 package src;
 
-import src.JDs.JDCadFilial;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;

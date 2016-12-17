@@ -57,15 +57,15 @@ public class FilialDAO {
             return false;
         }
     }
-    
+
     public boolean altera(FilialBean filial) throws ClassNotFoundException {
         try {
-         
+
             con = ConexaoFactory.getConnection();
             Statement stmt = con.createStatement();
-//            stmt.executeUpdate("UPDATE alunos SET nome='"
-//                    + aluno.getNome() + "',cpf='" + aluno.getCpf() + "',email='" + aluno.getEmail() + "',telefone='" + aluno.getTelefone() + "',periodo='" + aluno.getPeriodo() + "',serie='" + aluno.getSerie() + "',turma='" + aluno.getTurma() + "' WHERE cpf='" + aluno.getCpf() + "'");
-//            JOptionPane.showMessageDialog(null, " Filial Atualizada com Sucesso!!");
+            stmt.executeUpdate("UPDATE cad_filial SET cnpj='"
+                    + filial.getCnpj()+ "',inscricao_estadual='" + filial.getInscricao_estadual() + "',razao_social='" + filial.getRazao_social() + "',endereco='" + filial.getEndereco() + "',numero='" + filial.getNumero() + "',bairro='" + filial.getBairro() + "',cep='" + filial.getCep() + "',cidade='" + filial.getCidade() + "',telefone='" + filial.getTelefone() + "',uf='" + filial.getUf() + "' WHERE id_filial='" + filial.getId_filial() + "'");
+            JOptionPane.showMessageDialog(null, " Filial Atualizada com Sucesso!!");
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e);
@@ -73,5 +73,5 @@ public class FilialDAO {
         }
         return true;
     }
-    
+
 }

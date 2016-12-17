@@ -10,7 +10,8 @@ package bean;
  * @author ronaldo.pedro
  */
 public class FilialBean {
-    
+
+    private int id_filial;
     private String cnpj;
     private String inscricao_estadual;
     private String razao_social;
@@ -101,7 +102,13 @@ public class FilialBean {
     public void setUf(String uf) {
         this.uf = uf;
     }
-    
-    
-    
+
+    public int getId_filial() {
+        return id_filial;
+    }
+
+    public void setId_filial(int id_filial) {
+        this.id_filial = id_filial;
+    }
+
 }

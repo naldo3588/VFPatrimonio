@@ -5,7 +5,6 @@
  */
 package src;
 
-import src.JDs.JDCadFilial;
 import bean.EquipamentoBean;
 import dao.EquipamentoDAO;
 import javax.swing.JOptionPane;
@@ -398,9 +397,14 @@ public class JDCadEquipamento extends javax.swing.JDialog {
 
     private void jButtonNovoFilialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNovoFilialActionPerformed
         // TODO add your handling code here:
-        JDCadFilial filial = new JDCadFilial(null, rootPaneCheckingEnabled);
+        this.setModal(false);
+        JFCadFilial filial = new JFCadFilial();
         filial.setLocationRelativeTo(null);
         filial.setVisible(true);
+        filial.toFront();
+        filial.requestFocus();
+
+
     }//GEN-LAST:event_jButtonNovoFilialActionPerformed
 
     private void jButtonNovoDeptoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNovoDeptoActionPerformed
