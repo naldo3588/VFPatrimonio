@@ -26,6 +26,7 @@ public class JDCadEquipamento extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
+        this.setModal(false);
         lookandfell();
     }
 
@@ -397,14 +398,11 @@ public class JDCadEquipamento extends javax.swing.JDialog {
 
     private void jButtonNovoFilialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNovoFilialActionPerformed
         // TODO add your handling code here:
-        this.setModal(false);
         JFCadFilial filial = new JFCadFilial();
         filial.setLocationRelativeTo(null);
         filial.setVisible(true);
         filial.toFront();
-        filial.requestFocus();
-
-
+        
     }//GEN-LAST:event_jButtonNovoFilialActionPerformed
 
     private void jButtonNovoDeptoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNovoDeptoActionPerformed

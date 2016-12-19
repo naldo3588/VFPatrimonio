@@ -65,7 +65,7 @@ public class FilialDAO {
             Statement stmt = con.createStatement();
             stmt.executeUpdate("UPDATE cad_filial SET cnpj='"
                     + filial.getCnpj()+ "',inscricao_estadual='" + filial.getInscricao_estadual() + "',razao_social='" + filial.getRazao_social() + "',endereco='" + filial.getEndereco() + "',numero='" + filial.getNumero() + "',bairro='" + filial.getBairro() + "',cep='" + filial.getCep() + "',cidade='" + filial.getCidade() + "',telefone='" + filial.getTelefone() + "',uf='" + filial.getUf() + "' WHERE id_filial='" + filial.getId_filial() + "'");
-            JOptionPane.showMessageDialog(null, " Filial Atualizada com Sucesso!!");
+//            JOptionPane.showMessageDialog(null, " Filial Atualizada com Sucesso!!");
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e);

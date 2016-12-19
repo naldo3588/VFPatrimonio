@@ -9,6 +9,8 @@ import bean.FilialBean;
 import dao.FilialDAO;
 import factory.ConexaoFactory;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -367,8 +369,7 @@ public class JFCadFilial extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonEditarActionPerformed
 
     private void jButtonAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtualizarActionPerformed
-        // TODO add your handling code here:
-        
+        editar();
     }//GEN-LAST:event_jButtonAtualizarActionPerformed
 
     private void jButtonDesistirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDesistirActionPerformed
@@ -395,6 +396,30 @@ public class JFCadFilial extends javax.swing.JFrame {
         dao.inserir(filial);
         limparcampos();
         liberarEditAtt();
+    }
+
+    private void editar() {
+        try {
+            FilialBean filial = new FilialBean();
+            filial.setId_filial(Integer.parseInt(jTextFieldID.getText()));
+            filial.setCnpj(jFormattedTextFieldCNPJ.getText());
+            filial.setInscricao_estadual(jTextFieldInscEstadual.getText());
+            filial.setRazao_social(jTextFieldRazaoSoc.getText());
+            filial.setEndereco(jTextFieldEndereco.getText());
+            filial.setNumero(jTextFieldNumero.getText());
+            filial.setBairro(jTextFieldBairro.getText());
+            filial.setCep(jTextFieldCEP.getText());
+            filial.setCidade(jTextFieldCidade.getText());
+            filial.setTelefone(jFormattedTextFieldTelefone.getText());
+            filial.setUf(jTextFieldUF.getText());
+            FilialDAO dao = new FilialDAO();
+            dao.altera(filial);
+            JOptionPane.showMessageDialog(rootPane,"Filial Atualizada com Sucesso!!");
+            limparcampos();
+            liberarEditAtt();
+        } catch (Exception e) {
+        }
+
     }
 
     private void limparcampos() {
@@ -473,7 +498,7 @@ public class JFCadFilial extends javax.swing.JFrame {
         jButtonEditar.setEnabled(false);
         jButtonAtualizar.setEnabled(false);
     }
-    
+
     private void liberarNovoSalvar() {
         jButtonNovo.setEnabled(true);
         jButtonSalvar.setEnabled(true);
