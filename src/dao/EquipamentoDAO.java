@@ -59,4 +59,28 @@ public class EquipamentoDAO {
             return false;
         }
     }
+    
+     public boolean inserirProcessador(EquipamentoBean equipamento) {
+
+        try {
+
+            con = ConexaoFactory.getConnection();
+            String sql = "INSERT INTO cad_equipamento(descricao,modelo,num_serie,marca,processador,frequencia,ram,hd,filial,departamento,usuario,observacao,ult_verificacao) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            System.out.println("SQL");
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(5, equipamento.getProcessador());
+            ps.setString(6, equipamento.getFrequencia());
+  
+            JOptionPane.showMessageDialog(null, "Equipamento do Usuario " + equipamento.getUsuario() + " Cadastrado com sucesso! ");
+
+            return ps.executeUpdate() != PreparedStatement.EXECUTE_FAILED;
+
+        } catch (SQLException e) {
+
+            return false;
+        } catch (ClassNotFoundException e) {
+
+            return false;
+        }
+    }
 }

@@ -52,10 +52,8 @@ public class JDCadEquipamento extends javax.swing.JDialog {
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jTextFieldDescricao = new javax.swing.JTextField();
         jTextFieldModelo = new javax.swing.JTextField();
         jTextFieldNumSerie = new javax.swing.JTextField();
-        jComboBoxMarca = new javax.swing.JComboBox<>();
         jComboBoxProcessador = new javax.swing.JComboBox<>();
         jComboBoxFilial = new javax.swing.JComboBox<>();
         jComboBoxDepartamento = new javax.swing.JComboBox<>();
@@ -68,15 +66,16 @@ public class JDCadEquipamento extends javax.swing.JDialog {
         jButtonSalvar2 = new javax.swing.JButton();
         jFormattedTextFieldMemRAM = new javax.swing.JFormattedTextField();
         jFormattedTextFieldHD = new javax.swing.JFormattedTextField();
-        jFormattedTextFieldFrequencia = new javax.swing.JFormattedTextField();
-        jButtonNovoMarca = new javax.swing.JButton();
-        jButtonNovoProc = new javax.swing.JButton();
         jButtonNovoFilial = new javax.swing.JButton();
         jButtonNovoDepto = new javax.swing.JButton();
+        jComboBoxTipo = new javax.swing.JComboBox<>();
+        jComboBoxFrequencia = new javax.swing.JComboBox<>();
+        jTextFieldMarca = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Cadastro de Computadores ");
 
-        jLabel1.setText("Descrição:");
+        jLabel1.setText("Tipo:");
 
         jLabel2.setText("Modelo:");
 
@@ -102,14 +101,12 @@ public class JDCadEquipamento extends javax.swing.JDialog {
 
         jLabel13.setText("Ultima Verif.:");
 
-        jComboBoxMarca.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione" }));
-        jComboBoxMarca.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxMarcaActionPerformed(evt);
+        jComboBoxProcessador.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Intel Core i3", "Intel Core i5", "Intel Core i7" }));
+        jComboBoxProcessador.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jComboBoxProcessadorFocusLost(evt);
             }
         });
-
-        jComboBoxProcessador.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione" }));
         jComboBoxProcessador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxProcessadorActionPerformed(evt);
@@ -166,27 +163,6 @@ public class JDCadEquipamento extends javax.swing.JDialog {
         }
         jFormattedTextFieldHD.setToolTipText("");
 
-        try {
-            jFormattedTextFieldFrequencia.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#.# Ghz")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        jFormattedTextFieldFrequencia.setToolTipText("");
-
-        jButtonNovoMarca.setText("Novo");
-        jButtonNovoMarca.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonNovoMarcaActionPerformed(evt);
-            }
-        });
-
-        jButtonNovoProc.setText("Novo");
-        jButtonNovoProc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonNovoProcActionPerformed(evt);
-            }
-        });
-
         jButtonNovoFilial.setText("Novo");
         jButtonNovoFilial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -201,82 +177,84 @@ public class JDCadEquipamento extends javax.swing.JDialog {
             }
         });
 
+        jComboBoxTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Computador", "Notebook" }));
+        jComboBoxTipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxTipoActionPerformed(evt);
+            }
+        });
+
+        jComboBoxFrequencia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione" }));
+        jComboBoxFrequencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxFrequenciaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel11))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextFieldUsuario)
-                                    .addComponent(jComboBoxProcessador, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jComboBoxMarca, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jTextFieldDescricao)
-                                    .addComponent(jTextFieldModelo)
-                                    .addComponent(jTextFieldNumSerie, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButtonNovoMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButtonNovoProc, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel6)
-                                            .addComponent(jLabel9))
-                                        .addGap(8, 8, 8)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jComboBoxFilial, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jFormattedTextFieldMemRAM)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel8)
-                                            .addComponent(jLabel7))
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(20, 20, 20)
-                                                .addComponent(jFormattedTextFieldHD))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(18, 18, 18)
-                                                .addComponent(jFormattedTextFieldFrequencia))))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel10)
-                                            .addComponent(jLabel13))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jDateChooserUltVerificacao, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
-                                            .addComponent(jComboBoxDepartamento, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel9))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButtonNovoFilial, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButtonNovoDepto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(25, 25, 25))
-                    .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jComboBoxFilial, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButtonNovoFilial, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jTextFieldMarca, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jTextFieldUsuario, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jComboBoxProcessador, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jTextFieldNumSerie, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
+                                .addComponent(jComboBoxTipo, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel12)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel10)
+                                    .addComponent(jLabel13))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jDateChooserUltVerificacao, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+                                    .addComponent(jComboBoxDepartamento, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel8))
+                                .addGap(8, 8, 8)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jComboBoxFrequencia, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jFormattedTextFieldMemRAM)
+                                    .addComponent(jTextFieldModelo)
+                                    .addComponent(jFormattedTextFieldHD)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(jLabel12)
+                        .addGap(25, 25, 25)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jButtonSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
+                                .addGap(140, 140, 140)
                                 .addComponent(jButtonSalvar1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButtonSalvar2, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButtonSalvar2, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonNovoDepto, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -285,8 +263,8 @@ public class JDCadEquipamento extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel8)
-                            .addComponent(jFormattedTextFieldFrequencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel2)
+                            .addComponent(jTextFieldModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jFormattedTextFieldHD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -297,14 +275,18 @@ public class JDCadEquipamento extends javax.swing.JDialog {
                             .addComponent(jFormattedTextFieldMemRAM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel9)
-                            .addComponent(jComboBoxFilial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButtonNovoFilial))
+                            .addComponent(jLabel5)
+                            .addComponent(jComboBoxProcessador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8)
+                            .addComponent(jComboBoxFrequencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel10)
                             .addComponent(jComboBoxDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButtonNovoDepto))
+                            .addComponent(jButtonNovoDepto)
+                            .addComponent(jLabel9)
+                            .addComponent(jComboBoxFilial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonNovoFilial))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jDateChooserUltVerificacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -312,34 +294,24 @@ public class JDCadEquipamento extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
-                            .addComponent(jTextFieldDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(jTextFieldModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(jTextFieldNumSerie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jComboBoxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(jComboBoxMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButtonNovoMarca))
-                        .addGap(18, 18, 18)
+                            .addComponent(jTextFieldMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(17, 17, 17)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(jComboBoxProcessador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButtonNovoProc))
-                        .addGap(18, 18, 18)
+                            .addComponent(jLabel3)
+                            .addComponent(jTextFieldNumSerie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(100, 100, 100)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel11)
                             .addComponent(jTextFieldUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel12)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel12)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonSalvar)
                     .addComponent(jButtonSalvar1)
@@ -349,10 +321,6 @@ public class JDCadEquipamento extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jComboBoxMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxMarcaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxMarcaActionPerformed
 
     private void jComboBoxProcessadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxProcessadorActionPerformed
         // TODO add your handling code here:
@@ -382,27 +350,13 @@ public class JDCadEquipamento extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_jButtonSalvar2ActionPerformed
 
-    private void jButtonNovoMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNovoMarcaActionPerformed
-        // TODO add your handling code here:
-        JDCadMarca marca = new JDCadMarca(null, rootPaneCheckingEnabled);
-        marca.setLocationRelativeTo(null);
-        marca.setVisible(true);
-    }//GEN-LAST:event_jButtonNovoMarcaActionPerformed
-
-    private void jButtonNovoProcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNovoProcActionPerformed
-        // TODO add your handling code here:
-        JDCadProcessador processador = new JDCadProcessador(null, rootPaneCheckingEnabled);
-        processador.setLocationRelativeTo(null);
-        processador.setVisible(true);
-    }//GEN-LAST:event_jButtonNovoProcActionPerformed
-
     private void jButtonNovoFilialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNovoFilialActionPerformed
         // TODO add your handling code here:
         JFCadFilial filial = new JFCadFilial();
         filial.setLocationRelativeTo(null);
         filial.setVisible(true);
         filial.toFront();
-        
+
     }//GEN-LAST:event_jButtonNovoFilialActionPerformed
 
     private void jButtonNovoDeptoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNovoDeptoActionPerformed
@@ -412,15 +366,28 @@ public class JDCadEquipamento extends javax.swing.JDialog {
         departamento.setVisible(true);
     }//GEN-LAST:event_jButtonNovoDeptoActionPerformed
 
+    private void jComboBoxTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTipoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxTipoActionPerformed
+
+    private void jComboBoxFrequenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFrequenciaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxFrequenciaActionPerformed
+
+    private void jComboBoxProcessadorFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jComboBoxProcessadorFocusLost
+        // TODO add your handling code here:
+        selecionaProcessador();
+    }//GEN-LAST:event_jComboBoxProcessadorFocusLost
+
     private void salvar() {
 
         EquipamentoBean equipamento = new EquipamentoBean();
-        equipamento.setDescricao(jTextFieldDescricao.getText());
+        equipamento.setDescricao(jComboBoxTipo.getSelectedItem().toString());
         equipamento.setModelo(jTextFieldModelo.getText());
         equipamento.setNum_serie(jTextFieldNumSerie.getText());
-        equipamento.setMarca(jComboBoxMarca.getSelectedItem().toString());
+        equipamento.setMarca(jTextFieldMarca.getText());
         equipamento.setProcessador(jComboBoxProcessador.getSelectedItem().toString());
-        equipamento.setFrequencia(jFormattedTextFieldFrequencia.getText());
+        equipamento.setFrequencia(jComboBoxFrequencia.getSelectedItem().toString());
         equipamento.setRam(jFormattedTextFieldMemRAM.getText());
         equipamento.setHd(jFormattedTextFieldHD.getText());
         equipamento.setFilial(jComboBoxFilial.getSelectedItem().toString());
@@ -433,21 +400,44 @@ public class JDCadEquipamento extends javax.swing.JDialog {
 
     }
 
+    private void selecionaProcessador() {
+
+        if (jComboBoxProcessador.getSelectedItem().toString().equals("Intel Core i3")) {
+
+            jComboBoxFrequencia.setToolTipText("2100T – 2.5 GHz");
+            jComboBoxFrequencia.setSelectedItem("2120T – 2.6 GHz");
+            jComboBoxFrequencia.setSelectedItem("2100 – 3.1 GHz");
+            jComboBoxFrequencia.setSelectedItem("2102 – 3.1 GHz");
+            jComboBoxFrequencia.setSelectedItem("2105 – 3.1 GHz");
+            jComboBoxFrequencia.setSelectedItem("2120 – 3.3 GHz");
+            jComboBoxFrequencia.setSelectedItem("2125 – 3.3 GHz");
+            jComboBoxFrequencia.setSelectedItem("2130 – 3.4 GHz");
+            jComboBoxFrequencia.setSelectedItem("3220T – 2.8 GHz");
+            jComboBoxFrequencia.setSelectedItem("3240T – 2.9 GHz");
+            jComboBoxFrequencia.setSelectedItem("3220 – 3.3 GHz");
+            jComboBoxFrequencia.setSelectedItem("3225 – 3.3 GHz");
+            jComboBoxFrequencia.setSelectedItem("3240 – 3.4 GHz");
+            jComboBoxFrequencia.setSelectedItem("Selecione i3");
+            
+        }
+
+    }
+
     private void limparcampos() {
-        jTextFieldDescricao.setText("");
-        jFormattedTextFieldFrequencia.setText("");
+        jComboBoxTipo.setSelectedItem("Selecione");
+        jComboBoxFrequencia.setSelectedItem("Selecione");
         jTextFieldModelo.setText("");
         jTextFieldNumSerie.setText("");
         jTextFieldUsuario.setText("");
         jFormattedTextFieldHD.setText("");
         jFormattedTextFieldMemRAM.setText("");
         jTextPanelObservacao.setText("");
-        jComboBoxMarca.setSelectedItem("Selecione");
+        jTextFieldMarca.setText("");
         jComboBoxDepartamento.setSelectedItem("Selecione");
         jComboBoxProcessador.setSelectedItem("Selecione");
         jComboBoxFilial.setSelectedItem("Selecione");
         jDateChooserUltVerificacao.setDate(null);
-        jTextFieldDescricao.requestFocus();
+        jComboBoxTipo.requestFocus();
     }
 
     public void lookandfell() {
@@ -505,17 +495,15 @@ public class JDCadEquipamento extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonNovoDepto;
     private javax.swing.JButton jButtonNovoFilial;
-    private javax.swing.JButton jButtonNovoMarca;
-    private javax.swing.JButton jButtonNovoProc;
     private javax.swing.JButton jButtonSalvar;
     private javax.swing.JButton jButtonSalvar1;
     private javax.swing.JButton jButtonSalvar2;
     private javax.swing.JComboBox<String> jComboBoxDepartamento;
     private javax.swing.JComboBox<String> jComboBoxFilial;
-    private javax.swing.JComboBox<String> jComboBoxMarca;
+    private javax.swing.JComboBox<String> jComboBoxFrequencia;
     private javax.swing.JComboBox<String> jComboBoxProcessador;
+    private javax.swing.JComboBox<String> jComboBoxTipo;
     private com.toedter.calendar.JDateChooser jDateChooserUltVerificacao;
-    private javax.swing.JFormattedTextField jFormattedTextFieldFrequencia;
     private javax.swing.JFormattedTextField jFormattedTextFieldHD;
     private javax.swing.JFormattedTextField jFormattedTextFieldMemRAM;
     private javax.swing.JLabel jLabel1;
@@ -532,7 +520,7 @@ public class JDCadEquipamento extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextFieldDescricao;
+    private javax.swing.JTextField jTextFieldMarca;
     private javax.swing.JTextField jTextFieldModelo;
     private javax.swing.JTextField jTextFieldNumSerie;
     private javax.swing.JTextField jTextFieldUsuario;

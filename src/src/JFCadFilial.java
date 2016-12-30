@@ -348,6 +348,7 @@ public class JFCadFilial extends javax.swing.JFrame {
     private void jButtonNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNovoActionPerformed
         // TODO add your handling code here:
         bloquearEditAtt();
+        jButtonNovo.setEnabled(false);
         liberarCampos();
         jFormattedTextFieldCNPJ.requestFocus();
         limparcampos();
@@ -394,8 +395,10 @@ public class JFCadFilial extends javax.swing.JFrame {
         filial.setUf(jTextFieldUF.getText());
         FilialDAO dao = new FilialDAO();
         dao.inserir(filial);
+        JOptionPane.showMessageDialog(rootPane, "Filial de '"+jTextFieldCidade.getText()+"' cadastrada com Sucesso!!");
         limparcampos();
         liberarEditAtt();
+        jButtonNovo.setEnabled(true);
     }
 
     private void editar() {

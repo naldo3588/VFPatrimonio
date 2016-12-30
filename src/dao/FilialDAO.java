@@ -45,7 +45,7 @@ public class FilialDAO {
             ps.setString(9, filial.getTelefone());
             ps.setString(10, filial.getUf());
 
-            JOptionPane.showMessageDialog(null, "Filial de " + filial.getCidade() + " Cadastrada com sucesso! ");
+//            JOptionPane.showMessageDialog(null, "Filial de " + filial.getCidade() + " Cadastrada com sucesso! ");
 
             return ps.executeUpdate() != PreparedStatement.EXECUTE_FAILED;
 

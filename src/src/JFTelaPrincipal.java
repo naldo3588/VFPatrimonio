@@ -42,6 +42,13 @@ public class JFTelaPrincipal extends javax.swing.JFrame {
         jMenuItemDepartamentos = new javax.swing.JMenuItem();
         jMenuItemEquipamentos = new javax.swing.JMenuItem();
         jMenuItemFiliais = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuCadastros1 = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
+        jMenuItem4 = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -86,7 +93,40 @@ public class JFTelaPrincipal extends javax.swing.JFrame {
         });
         jMenuCadastros.add(jMenuItemFiliais);
 
+        jMenu2.setText("Perifericos");
+        jMenu2.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+
+        jMenuItem3.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        jMenuItem3.setText("Teclado e Mouse");
+        jMenu2.add(jMenuItem3);
+
+        jMenuCadastros.add(jMenu2);
+
+        jMenu4.setText("Outros");
+        jMenu4.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+
+        jMenuItem5.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        jMenuItem5.setText("Marcas");
+        jMenu4.add(jMenuItem5);
+
+        jMenuCadastros.add(jMenu4);
+
         jMenu.add(jMenuCadastros);
+
+        jMenuCadastros1.setBorder(new javax.swing.border.MatteBorder(null));
+        jMenuCadastros1.setText("Configurações");
+        jMenuCadastros1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        jMenu3.setText("Manutenção");
+        jMenu3.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+
+        jMenuItem4.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        jMenuItem4.setText("Processadores");
+        jMenu3.add(jMenuItem4);
+
+        jMenuCadastros1.add(jMenu3);
+
+        jMenu.add(jMenuCadastros1);
 
         setJMenuBar(jMenu);
 
@@ -184,8 +224,15 @@ public class JFTelaPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonSair;
     private javax.swing.JMenuBar jMenu;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenuCadastros;
+    private javax.swing.JMenu jMenuCadastros1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItemDepartamentos;
     private javax.swing.JMenuItem jMenuItemEquipamentos;
     private javax.swing.JMenuItem jMenuItemFiliais;
