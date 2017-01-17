@@ -81,6 +81,11 @@ public class JDCadEquipamento extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Computadores ");
+        addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                formMouseMoved(evt);
+            }
+        });
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {
             public void windowGainedFocus(java.awt.event.WindowEvent evt) {
                 formWindowGainedFocus(evt);
@@ -426,7 +431,11 @@ public class JDCadEquipamento extends javax.swing.JDialog {
 
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
         // TODO add your handling code here:
-      
+        if (jComboBoxProcessador.getSelectedItem().toString().equals("Selecione")) {
+            jComboBoxFrequencia.addItem("Selecione");
+            jComboBoxFrequencia.setSelectedItem("Selecione");
+        }
+
     }//GEN-LAST:event_formWindowGainedFocus
 
     private void formWindowLostFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowLostFocus
@@ -449,6 +458,10 @@ public class JDCadEquipamento extends javax.swing.JDialog {
         // TODO add your handling code here:
         jComboBoxFrequencia.removeAllItems();
         selecionaProcessador();
+        if (jComboBoxProcessador.getSelectedItem().toString().equals("Selecione")) {
+            jComboBoxFrequencia.addItem("Selecione");
+            jComboBoxFrequencia.setSelectedItem("Selecione");
+        }
     }//GEN-LAST:event_jComboBoxProcessadorItemStateChanged
 
     private void jComboBoxDepartamentoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxDepartamentoItemStateChanged
@@ -466,6 +479,11 @@ public class JDCadEquipamento extends javax.swing.JDialog {
         // TODO add your handling code here:
         carregarcombobox();
     }//GEN-LAST:event_jComboBoxFilialMouseClicked
+
+    private void formMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseMoved
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_formMouseMoved
 
     private void salvar() {
 
@@ -485,6 +503,13 @@ public class JDCadEquipamento extends javax.swing.JDialog {
         equipamento.setUlt_verificacao(jDateChooserUltVerificacao.getDate());
         EquipamentoDAO dao = new EquipamentoDAO();
         dao.inserir(equipamento);
+        JOptionPane.showMessageDialog(rootPane, "Equipamento '" + jTextFieldModelo.getText() + "' cadastrado com Sucesso!!");
+        jComboBoxDepartamento.addItem("Selecione");
+        jComboBoxDepartamento.setSelectedItem("Selecione");
+        jComboBoxFilial.addItem("Selecione");
+        jComboBoxFilial.setSelectedItem("Selecione");
+        jComboBoxFrequencia.addItem("Selecione");
+        jComboBoxFrequencia.setSelectedItem("Selecione");
 
     }
 

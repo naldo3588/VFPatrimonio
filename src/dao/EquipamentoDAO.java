@@ -47,7 +47,7 @@ public class EquipamentoDAO {
             ps.setString(12, equipamento.getObservacao());
             ps.setObject(13, equipamento.getUlt_verificacao());
 
-            JOptionPane.showMessageDialog(null, "Equipamento do Usuario " + equipamento.getUsuario() + " Cadastrado com sucesso! ");
+//            JOptionPane.showMessageDialog(null, "Equipamento do Usuario " + equipamento.getUsuario() + " Cadastrado com sucesso! ");
 
             return ps.executeUpdate() != PreparedStatement.EXECUTE_FAILED;
 
