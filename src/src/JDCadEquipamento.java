@@ -6,7 +6,10 @@
 package src;
 
 import bean.EquipamentoBean;
+import bean.FilialBean;
 import dao.EquipamentoDAO;
+import factory.ConexaoFactory;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
@@ -18,6 +21,9 @@ import javax.swing.UIManager;
 public class JDCadEquipamento extends javax.swing.JDialog {
 
     String look_and_fell = ("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+    private java.sql.Connection con;
+    private java.sql.Statement stmtListar;
+    private java.sql.ResultSet rsListar;
 
     /**
      * Creates new form JDCadEquipamento
@@ -28,6 +34,7 @@ public class JDCadEquipamento extends javax.swing.JDialog {
         this.setLocationRelativeTo(null);
         this.setModal(false);
         lookandfell();
+
     }
 
     /**
@@ -74,6 +81,14 @@ public class JDCadEquipamento extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Computadores ");
+        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+                formWindowGainedFocus(evt);
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+                formWindowLostFocus(evt);
+            }
+        });
 
         jLabel1.setText("Tipo:");
 
@@ -102,9 +117,22 @@ public class JDCadEquipamento extends javax.swing.JDialog {
         jLabel13.setText("Ultima Verif.:");
 
         jComboBoxProcessador.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Intel Core i3", "Intel Core i5", "Intel Core i7" }));
+        jComboBoxProcessador.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBoxProcessadorItemStateChanged(evt);
+            }
+        });
         jComboBoxProcessador.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jComboBoxProcessadorFocusLost(evt);
+            }
+        });
+        jComboBoxProcessador.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jComboBoxProcessadorMouseExited(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jComboBoxProcessadorMouseReleased(evt);
             }
         });
         jComboBoxProcessador.addActionListener(new java.awt.event.ActionListener() {
@@ -185,6 +213,7 @@ public class JDCadEquipamento extends javax.swing.JDialog {
         });
 
         jComboBoxFrequencia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione" }));
+        jComboBoxFrequencia.setToolTipText("Selecione o processador");
         jComboBoxFrequencia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxFrequenciaActionPerformed(evt);
@@ -376,8 +405,37 @@ public class JDCadEquipamento extends javax.swing.JDialog {
 
     private void jComboBoxProcessadorFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jComboBoxProcessadorFocusLost
         // TODO add your handling code here:
-        selecionaProcessador();
+//        jComboBoxFrequencia.removeAllItems();
+//        selecionaProcessador();
     }//GEN-LAST:event_jComboBoxProcessadorFocusLost
+
+    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
+        // TODO add your handling code here:
+        carregarcombobox();
+    }//GEN-LAST:event_formWindowGainedFocus
+
+    private void formWindowLostFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowLostFocus
+        // TODO add your handling code here:
+        carregarcombobox();
+    }//GEN-LAST:event_formWindowLostFocus
+
+    private void jComboBoxProcessadorMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxProcessadorMouseExited
+        // TODO add your handling code here:
+//        jComboBoxFrequencia.removeAllItems();
+//        selecionaProcessador();
+    }//GEN-LAST:event_jComboBoxProcessadorMouseExited
+
+    private void jComboBoxProcessadorMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxProcessadorMouseReleased
+        // TODO add your handling code here:
+//        jComboBoxFrequencia.removeAllItems();
+//        selecionaProcessador();
+    }//GEN-LAST:event_jComboBoxProcessadorMouseReleased
+
+    private void jComboBoxProcessadorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxProcessadorItemStateChanged
+        // TODO add your handling code here:
+         jComboBoxFrequencia.removeAllItems();
+        selecionaProcessador();
+    }//GEN-LAST:event_jComboBoxProcessadorItemStateChanged
 
     private void salvar() {
 
@@ -403,24 +461,97 @@ public class JDCadEquipamento extends javax.swing.JDialog {
     private void selecionaProcessador() {
 
         if (jComboBoxProcessador.getSelectedItem().toString().equals("Intel Core i3")) {
+            jComboBoxFrequencia.removeItem("Selecione");
+            jComboBoxFrequencia.addItem("Selecione i3");
+            jComboBoxFrequencia.addItem("2100T – 2.5 GHz");
+            jComboBoxFrequencia.addItem("2120T – 2.6 GHz");
+            jComboBoxFrequencia.addItem("2100 – 3.1 GHz");
+            jComboBoxFrequencia.addItem("2102 – 3.1 GHz");
+            jComboBoxFrequencia.addItem("2105 – 3.1 GHz");
+            jComboBoxFrequencia.addItem("2120 – 3.3 GHz");
+            jComboBoxFrequencia.addItem("2125 – 3.3 GHz");
+            jComboBoxFrequencia.addItem("2130 – 3.4 GHz");
+            jComboBoxFrequencia.addItem("3220T – 2.8 GHz");
+            jComboBoxFrequencia.addItem("3240T – 2.9 GHz");
+            jComboBoxFrequencia.addItem("3220 – 3.3 GHz");
+            jComboBoxFrequencia.addItem("3225 – 3.3 GHz");
+            jComboBoxFrequencia.addItem("3240 – 3.4 GHz");
 
-            jComboBoxFrequencia.setToolTipText("2100T – 2.5 GHz");
-            jComboBoxFrequencia.setSelectedItem("2120T – 2.6 GHz");
-            jComboBoxFrequencia.setSelectedItem("2100 – 3.1 GHz");
-            jComboBoxFrequencia.setSelectedItem("2102 – 3.1 GHz");
-            jComboBoxFrequencia.setSelectedItem("2105 – 3.1 GHz");
-            jComboBoxFrequencia.setSelectedItem("2120 – 3.3 GHz");
-            jComboBoxFrequencia.setSelectedItem("2125 – 3.3 GHz");
-            jComboBoxFrequencia.setSelectedItem("2130 – 3.4 GHz");
-            jComboBoxFrequencia.setSelectedItem("3220T – 2.8 GHz");
-            jComboBoxFrequencia.setSelectedItem("3240T – 2.9 GHz");
-            jComboBoxFrequencia.setSelectedItem("3220 – 3.3 GHz");
-            jComboBoxFrequencia.setSelectedItem("3225 – 3.3 GHz");
-            jComboBoxFrequencia.setSelectedItem("3240 – 3.4 GHz");
-            jComboBoxFrequencia.setSelectedItem("Selecione i3");
-            
         }
 
+        if (jComboBoxProcessador.getSelectedItem().toString().equals("Intel Core i5")) {
+            jComboBoxFrequencia.removeItem("Selecione");
+            jComboBoxFrequencia.addItem("Selecione i5");
+            jComboBoxFrequencia.addItem("2390T – 2.7 GHz");
+            jComboBoxFrequencia.addItem("2500T – 2.3 GHz");
+            jComboBoxFrequencia.addItem("2400S – 2.5 GHz");
+            jComboBoxFrequencia.addItem("2405S – 2.5 GHz");
+            jComboBoxFrequencia.addItem("2500S – 2.7 GHz");
+            jComboBoxFrequencia.addItem("2300 – 2.8 GHz");
+            jComboBoxFrequencia.addItem("2310 – 2.9 GHz");
+            jComboBoxFrequencia.addItem("2320 – 3.0 GHz");
+            jComboBoxFrequencia.addItem("2380P – 3.1 GHz");
+            jComboBoxFrequencia.addItem("2400 – 3.1 GHz");
+            jComboBoxFrequencia.addItem("2450P – 3.2 GHz");
+            jComboBoxFrequencia.addItem("2500 – 3.3 GHz");
+            jComboBoxFrequencia.addItem("2500K – 3.3 GHz");
+            jComboBoxFrequencia.addItem("2390T – 2.7 GHz");
+            jComboBoxFrequencia.addItem("2390T – 2.7 GHz");
+            jComboBoxFrequencia.addItem("3570T – 2.3 GHz");
+            jComboBoxFrequencia.addItem("3330S – 2.7 GHz");
+            jComboBoxFrequencia.addItem("3450S – 2.8 GHz");
+            jComboBoxFrequencia.addItem("3475S – 2.9 GHz");
+            jComboBoxFrequencia.addItem("3470S – 2.9 GHz");
+            jComboBoxFrequencia.addItem("3550S – 3.0 GHz");
+            jComboBoxFrequencia.addItem("3570S – 3.1 GHz");
+            jComboBoxFrequencia.addItem("3330 – 3.0 GHz");
+            jComboBoxFrequencia.addItem("3450 – 3.1 GHz");
+            jComboBoxFrequencia.addItem("3470 – 3.2 GHz");
+            jComboBoxFrequencia.addItem("3550 – 3.3 GHz");
+            jComboBoxFrequencia.addItem("570 – 3.4 GHz");
+            jComboBoxFrequencia.addItem("3960X – 3.3 GHz");
+
+        }
+
+        if (jComboBoxProcessador.getSelectedItem().toString().equals("Intel Core i7")) {
+            jComboBoxFrequencia.removeItem("Selecione");
+            jComboBoxFrequencia.addItem("Selecione i7");
+            jComboBoxFrequencia.addItem("2600S – 2.8 GHz");
+            jComboBoxFrequencia.addItem("2600 – 3.4 GHz");
+            jComboBoxFrequencia.addItem("2600K – 3.4 GHz");
+            jComboBoxFrequencia.addItem("2700K – 3.5 GHz");
+            jComboBoxFrequencia.addItem("3820 – 3.6 GHz");
+            jComboBoxFrequencia.addItem("3930K – 3.2 GHz");
+            jComboBoxFrequencia.addItem("3960X – 3.3 GHz");
+            jComboBoxFrequencia.addItem("3970X – 3.5 GHz");
+            jComboBoxFrequencia.addItem("3770T – 2.5 GHz");
+            jComboBoxFrequencia.addItem("3770S – 3.1 GHz");
+            jComboBoxFrequencia.addItem("3770 – 3.4 GHz");
+            jComboBoxFrequencia.addItem("3770K – 3.5 GHz");
+
+        }
+    }
+
+    private void carregarcombobox() {
+        try {
+            FilialBean filial = new FilialBean();
+            iniciarBD(filial);
+            rsListar = stmtListar.executeQuery("SELECT * FROM cad_filial");
+            while (rsListar.next()) {
+                jComboBoxFilial.addItem(rsListar.getString(9));
+            }
+        } catch (Exception e) {
+        }
+    }
+
+    private void iniciarBD(FilialBean filial) {
+        try {
+            con = ConexaoFactory.getConnection();
+            stmtListar = con.createStatement();
+
+        } catch (ClassNotFoundException | SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Error " + ex.getMessage());
+        }
     }
 
     private void limparcampos() {
