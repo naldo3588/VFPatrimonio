@@ -22,6 +22,7 @@ public class FilialBean {
     private String cidade;
     private String telefone;
     private String uf;
+    private String departamento;
 
     public String getCnpj() {
         return cnpj;
@@ -109,6 +110,14 @@ public class FilialBean {
 
     public void setId_filial(int id_filial) {
         this.id_filial = id_filial;
+    }
+
+    public String getDepartamento() {
+        return departamento;
+    }
+
+    public void setDepartamento(String departamento) {
+        this.departamento = departamento;
     }
 
 }

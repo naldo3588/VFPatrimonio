@@ -74,4 +74,24 @@ public class FilialDAO {
         return true;
     }
 
+    public boolean inserirDpto(FilialBean filial) {
+        
+        try {
+           con = ConexaoFactory.getConnection();
+            String sql = "INSERT INTO cad_dpto(nome_dpto) VALUES (?)";
+            System.out.println("SQL");
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, filial.getDepartamento());
+            
+         return ps.executeUpdate() != PreparedStatement.EXECUTE_FAILED;
+
+        } catch (SQLException e) {
+
+            return false;
+        } catch (ClassNotFoundException e) {
+
+            return false;
+        }
+    }
+    
 }

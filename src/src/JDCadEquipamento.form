@@ -288,6 +288,7 @@
         </Property>
       </Properties>
       <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jComboBoxFilialMouseClicked"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBoxFilialActionPerformed"/>
       </Events>
       <AuxValues>
@@ -303,6 +304,8 @@
         </Property>
       </Properties>
       <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jComboBoxDepartamentoItemStateChanged"/>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jComboBoxDepartamentoMouseClicked"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBoxDepartamentoActionPerformed"/>
       </Events>
       <AuxValues>
@@ -384,8 +387,8 @@
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="3">
             <StringItem index="0" value="Selecione"/>
-            <StringItem index="1" value="Computador"/>
-            <StringItem index="2" value="Notebook"/>
+            <StringItem index="1" value="COMPUTADOR"/>
+            <StringItem index="2" value="NOTEBOOK"/>
           </StringArray>
         </Property>
       </Properties>

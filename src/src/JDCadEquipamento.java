@@ -142,6 +142,11 @@ public class JDCadEquipamento extends javax.swing.JDialog {
         });
 
         jComboBoxFilial.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione" }));
+        jComboBoxFilial.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jComboBoxFilialMouseClicked(evt);
+            }
+        });
         jComboBoxFilial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxFilialActionPerformed(evt);
@@ -149,6 +154,16 @@ public class JDCadEquipamento extends javax.swing.JDialog {
         });
 
         jComboBoxDepartamento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione" }));
+        jComboBoxDepartamento.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBoxDepartamentoItemStateChanged(evt);
+            }
+        });
+        jComboBoxDepartamento.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jComboBoxDepartamentoMouseClicked(evt);
+            }
+        });
         jComboBoxDepartamento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxDepartamentoActionPerformed(evt);
@@ -205,7 +220,7 @@ public class JDCadEquipamento extends javax.swing.JDialog {
             }
         });
 
-        jComboBoxTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Computador", "Notebook" }));
+        jComboBoxTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "COMPUTADOR", "NOTEBOOK" }));
         jComboBoxTipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxTipoActionPerformed(evt);
@@ -411,12 +426,11 @@ public class JDCadEquipamento extends javax.swing.JDialog {
 
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
         // TODO add your handling code here:
-        carregarcombobox();
+      
     }//GEN-LAST:event_formWindowGainedFocus
 
     private void formWindowLostFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowLostFocus
-        // TODO add your handling code here:
-        carregarcombobox();
+
     }//GEN-LAST:event_formWindowLostFocus
 
     private void jComboBoxProcessadorMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxProcessadorMouseExited
@@ -433,9 +447,25 @@ public class JDCadEquipamento extends javax.swing.JDialog {
 
     private void jComboBoxProcessadorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxProcessadorItemStateChanged
         // TODO add your handling code here:
-         jComboBoxFrequencia.removeAllItems();
+        jComboBoxFrequencia.removeAllItems();
         selecionaProcessador();
     }//GEN-LAST:event_jComboBoxProcessadorItemStateChanged
+
+    private void jComboBoxDepartamentoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxDepartamentoItemStateChanged
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_jComboBoxDepartamentoItemStateChanged
+
+    private void jComboBoxDepartamentoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxDepartamentoMouseClicked
+        // TODO add your handling code here:
+        carregarcomboboxDpto();
+
+    }//GEN-LAST:event_jComboBoxDepartamentoMouseClicked
+
+    private void jComboBoxFilialMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxFilialMouseClicked
+        // TODO add your handling code here:
+        carregarcombobox();
+    }//GEN-LAST:event_jComboBoxFilialMouseClicked
 
     private void salvar() {
 
@@ -537,9 +567,24 @@ public class JDCadEquipamento extends javax.swing.JDialog {
             FilialBean filial = new FilialBean();
             iniciarBD(filial);
             rsListar = stmtListar.executeQuery("SELECT * FROM cad_filial");
+            jComboBoxFilial.removeAllItems();
             while (rsListar.next()) {
                 jComboBoxFilial.addItem(rsListar.getString(9));
             }
+        } catch (Exception e) {
+        }
+    }
+
+    private void carregarcomboboxDpto() {
+        try {
+            FilialBean filial = new FilialBean();
+            iniciarBD(filial);
+            rsListar = stmtListar.executeQuery("SELECT * FROM cad_dpto");
+            jComboBoxDepartamento.removeAllItems();
+            while (rsListar.next()) {
+                jComboBoxDepartamento.addItem(rsListar.getString(2));
+            }
+
         } catch (Exception e) {
         }
     }

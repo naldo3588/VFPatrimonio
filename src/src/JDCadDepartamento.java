@@ -5,6 +5,8 @@
  */
 package src;
 
+import bean.FilialBean;
+import dao.FilialDAO;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
@@ -24,6 +26,7 @@ public class JDCadDepartamento extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         lookandfell();
+        jTextFieldNomeDepto.setEnabled(false);
     }
 
     /**
@@ -37,23 +40,65 @@ public class JDCadDepartamento extends javax.swing.JDialog {
 
         jLabel1 = new javax.swing.JLabel();
         jTextFieldNomeDepto = new javax.swing.JTextField();
+        jButtonSalvar = new javax.swing.JButton();
+        jButtonLimpar = new javax.swing.JButton();
+        jButtonSair = new javax.swing.JButton();
+        jButtonNovo = new javax.swing.JButton();
+        jButtonEditar = new javax.swing.JButton();
+        jButtonAtualizar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Departamentos ");
 
         jLabel1.setText("Nome:");
 
-        jButton1.setText("Salvar");
-
-        jButton2.setText("Limpar");
-
-        jButton3.setText("Sair");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jButtonSalvar.setText("Salvar");
+        jButtonSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jButtonSalvarActionPerformed(evt);
+            }
+        });
+
+        jButtonLimpar.setText("Limpar");
+        jButtonLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLimparActionPerformed(evt);
+            }
+        });
+
+        jButtonSair.setText("Sair");
+        jButtonSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSairActionPerformed(evt);
+            }
+        });
+
+        jButtonNovo.setText("Novo");
+        jButtonNovo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonNovoActionPerformed(evt);
+            }
+        });
+
+        jButtonEditar.setText("Editar");
+        jButtonEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEditarActionPerformed(evt);
+            }
+        });
+
+        jButtonAtualizar.setText("Atualizar");
+        jButtonAtualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAtualizarActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Desistir");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -63,18 +108,27 @@ public class JDCadDepartamento extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButtonNovo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonSalvar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonEditar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonAtualizar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonLimpar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonSair, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextFieldNomeDepto))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton1)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -83,22 +137,96 @@ public class JDCadDepartamento extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jTextFieldNomeDepto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(jButtonSalvar)
+                    .addComponent(jButtonLimpar)
+                    .addComponent(jButtonSair)
+                    .addComponent(jButtonNovo)
+                    .addComponent(jButtonEditar)
+                    .addComponent(jButtonAtualizar))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
         // TODO add your handling code here:
         this.dispose();
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_jButtonSairActionPerformed
 
+    private void jButtonNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNovoActionPerformed
+        // TODO add your handling code here:
+        jTextFieldNomeDepto.setEnabled(true);
+        jButtonAtualizar.setEnabled(false);
+        jButtonEditar.setEnabled(false);
+    }//GEN-LAST:event_jButtonNovoActionPerformed
+
+    private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
+        // TODO add your handling code here:
+        salvar();
+        
+    }//GEN-LAST:event_jButtonSalvarActionPerformed
+
+    private void jButtonLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLimparActionPerformed
+        // TODO add your handling code here:
+        jTextFieldNomeDepto.setText("");
+    }//GEN-LAST:event_jButtonLimparActionPerformed
+
+    private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
+        // TODO add your handling code here:
+        jTextFieldNomeDepto.setEnabled(true);
+        jButtonNovo.setEnabled(false);
+        jButtonSalvar.setEnabled(false);
+    }//GEN-LAST:event_jButtonEditarActionPerformed
+
+    private void jButtonAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtualizarActionPerformed
+        // TODO add your handling code here:
+        jButtonNovo.setEnabled(true);
+        jButtonSalvar.setEnabled(true);
+    }//GEN-LAST:event_jButtonAtualizarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        jButtonAtualizar.setEnabled(true);
+        jButtonEditar.setEnabled(true);
+        jButtonLimpar.setEnabled(true);
+        jButtonNovo.setEnabled(true);
+        jButtonSair.setEnabled(true);
+        jButtonSalvar.setEnabled(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void salvar() {
+
+        FilialBean filial = new FilialBean();  
+        filial.setDepartamento(jTextFieldNomeDepto.getText());
+        FilialDAO dao = new FilialDAO();
+        dao.inserirDpto(filial);
+        JOptionPane.showMessageDialog(rootPane, "Departamento '"+jTextFieldNomeDepto.getText()+"' cadastrado com Sucesso!!");
+        jTextFieldNomeDepto.setText("");
+        jButtonNovo.setEnabled(true);
+         jButtonAtualizar.setEnabled(true);
+        jButtonEditar.setEnabled(true);
+    }
+    
+    private void bloquearBotoes(){
+        
+        jButtonAtualizar.setEnabled(false);
+        jButtonEditar.setEnabled(false);
+        jButtonLimpar.setEnabled(false);
+        jButtonNovo.setEnabled(false);
+        jButtonSair.setEnabled(false);
+        jButtonSalvar.setEnabled(false);
+        
+    }
+    
+    private void liberarcampos(){
+        
+    }
+    
     public void lookandfell() {
         try {
 
@@ -154,8 +282,12 @@ public class JDCadDepartamento extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButtonAtualizar;
+    private javax.swing.JButton jButtonEditar;
+    private javax.swing.JButton jButtonLimpar;
+    private javax.swing.JButton jButtonNovo;
+    private javax.swing.JButton jButtonSair;
+    private javax.swing.JButton jButtonSalvar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JTextField jTextFieldNomeDepto;
     // End of variables declaration//GEN-END:variables
