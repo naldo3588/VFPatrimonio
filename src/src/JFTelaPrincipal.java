@@ -53,6 +53,7 @@ public class JFTelaPrincipal extends javax.swing.JFrame {
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuCadastros1 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
+        jMenuItemUsuarios = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
@@ -151,6 +152,15 @@ public class JFTelaPrincipal extends javax.swing.JFrame {
         jMenu3.setText("Manutenção");
         jMenu3.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
 
+        jMenuItemUsuarios.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        jMenuItemUsuarios.setText("Usuários");
+        jMenuItemUsuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemUsuariosActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItemUsuarios);
+
         jMenuItem4.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jMenuItem4.setText("Processadores");
         jMenu3.add(jMenuItem4);
@@ -200,6 +210,13 @@ public class JFTelaPrincipal extends javax.swing.JFrame {
         departamento.setLocationRelativeTo(null);
         departamento.setVisible(true);
     }//GEN-LAST:event_jMenuItemDepartamentosActionPerformed
+
+    private void jMenuItemUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemUsuariosActionPerformed
+        // TODO add your handling code here:
+        JDCRUDUsuario jDCRUDUsuario = new JDCRUDUsuario(null, rootPaneCheckingEnabled);
+        jDCRUDUsuario.setLocationRelativeTo(null);
+        jDCRUDUsuario.setVisible(true);
+    }//GEN-LAST:event_jMenuItemUsuariosActionPerformed
 
     public void lookandfell() {
         try {
@@ -262,6 +279,7 @@ public class JFTelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemDepartamentos;
     private javax.swing.JMenuItem jMenuItemEquipamentos;
     private javax.swing.JMenuItem jMenuItemFiliais;
+    private javax.swing.JMenuItem jMenuItemUsuarios;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

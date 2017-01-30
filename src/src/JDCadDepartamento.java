@@ -7,9 +7,12 @@ package src;
 
 import bean.FilialBean;
 import dao.FilialDAO;
+import factory.ConexaoFactory;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -18,6 +21,9 @@ import javax.swing.UIManager;
 public class JDCadDepartamento extends javax.swing.JDialog {
 
     String look_and_fell = ("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+    private java.sql.Connection con;
+    private java.sql.Statement stmtListar;
+    private java.sql.ResultSet rsListar;
 
     /**
      * Creates new form JDCadMarca
@@ -27,6 +33,7 @@ public class JDCadDepartamento extends javax.swing.JDialog {
         initComponents();
         lookandfell();
         jTextFieldNomeDepto.setEnabled(false);
+        jPanelDpto.setVisible(false);
     }
 
     /**
@@ -47,6 +54,10 @@ public class JDCadDepartamento extends javax.swing.JDialog {
         jButtonEditar = new javax.swing.JButton();
         jButtonAtualizar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jButtonListar = new javax.swing.JButton();
+        jPanelDpto = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableDpto = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Departamentos ");
@@ -102,6 +113,55 @@ public class JDCadDepartamento extends javax.swing.JDialog {
             }
         });
 
+        jButtonListar.setText("Listar");
+        jButtonListar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonListarActionPerformed(evt);
+            }
+        });
+
+        jTableDpto.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "DEPARTAMENTO"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTableDpto);
+        if (jTableDpto.getColumnModel().getColumnCount() > 0) {
+            jTableDpto.getColumnModel().getColumn(0).setResizable(false);
+            jTableDpto.getColumnModel().getColumn(0).setPreferredWidth(2);
+            jTableDpto.getColumnModel().getColumn(1).setResizable(false);
+            jTableDpto.getColumnModel().getColumn(1).setPreferredWidth(320);
+        }
+
+        javax.swing.GroupLayout jPanelDptoLayout = new javax.swing.GroupLayout(jPanelDpto);
+        jPanelDpto.setLayout(jPanelDptoLayout);
+        jPanelDptoLayout.setHorizontalGroup(
+            jPanelDptoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+        );
+        jPanelDptoLayout.setVerticalGroup(
+            jPanelDptoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -109,6 +169,10 @@ public class JDCadDepartamento extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldNomeDepto))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButtonNovo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -118,16 +182,14 @@ public class JDCadDepartamento extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonAtualizar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonLimpar)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButtonLimpar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonListar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonSair, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldNomeDepto))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButtonSair, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jPanelDpto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -138,8 +200,10 @@ public class JDCadDepartamento extends javax.swing.JDialog {
                     .addComponent(jLabel1)
                     .addComponent(jTextFieldNomeDepto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonListar, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonSalvar)
                     .addComponent(jButtonLimpar)
@@ -147,6 +211,8 @@ public class JDCadDepartamento extends javax.swing.JDialog {
                     .addComponent(jButtonNovo)
                     .addComponent(jButtonEditar)
                     .addComponent(jButtonAtualizar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanelDpto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -168,12 +234,13 @@ public class JDCadDepartamento extends javax.swing.JDialog {
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         // TODO add your handling code here:
         salvar();
-        
+
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
     private void jButtonLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLimparActionPerformed
         // TODO add your handling code here:
         jTextFieldNomeDepto.setText("");
+        ((DefaultTableModel) jTableDpto.getModel()).setNumRows(0);
     }//GEN-LAST:event_jButtonLimparActionPerformed
 
     private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
@@ -199,34 +266,85 @@ public class JDCadDepartamento extends javax.swing.JDialog {
         jButtonSalvar.setEnabled(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButtonListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonListarActionPerformed
+        // TODO add your handling code here:
+        jPanelDpto.setVisible(true);
+        ((DefaultTableModel) jTableDpto.getModel()).setNumRows(0);
+        ((DefaultTableModel) jTableDpto.getModel()).setNumRows(100);
+        buscarDpto();
+    }//GEN-LAST:event_jButtonListarActionPerformed
+
     private void salvar() {
 
-        FilialBean filial = new FilialBean();  
+        FilialBean filial = new FilialBean();
         filial.setDepartamento(jTextFieldNomeDepto.getText());
         FilialDAO dao = new FilialDAO();
         dao.inserirDpto(filial);
-        JOptionPane.showMessageDialog(rootPane, "Departamento '"+jTextFieldNomeDepto.getText()+"' cadastrado com Sucesso!!");
+        JOptionPane.showMessageDialog(rootPane, "Departamento '" + jTextFieldNomeDepto.getText() + "' cadastrado com Sucesso!!");
         jTextFieldNomeDepto.setText("");
         jButtonNovo.setEnabled(true);
-         jButtonAtualizar.setEnabled(true);
+        jButtonAtualizar.setEnabled(true);
         jButtonEditar.setEnabled(true);
     }
-    
-    private void bloquearBotoes(){
-        
+
+    private void bloquearBotoes() {
+
         jButtonAtualizar.setEnabled(false);
         jButtonEditar.setEnabled(false);
         jButtonLimpar.setEnabled(false);
         jButtonNovo.setEnabled(false);
         jButtonSair.setEnabled(false);
         jButtonSalvar.setEnabled(false);
-        
+
     }
-    
-    private void liberarcampos(){
-        
+
+    private void buscarDpto() {
+        try {
+            FilialBean filial = new FilialBean();
+            filial.setDepartamento(jTextFieldNomeDepto.getText());
+            iniciarBD();
+            rsListar = stmtListar.executeQuery("SELECT * FROM cad_dpto");
+            if (!rsListar.next()) {
+                JOptionPane.showMessageDialog(null, "Nenhum resultado para esta pesqusa!!");
+                jTextFieldNomeDepto.requestFocus();
+            } else {
+                rsListar = stmtListar.executeQuery("SELECT * FROM cad_dpto");
+                montarTabela();
+            }
+        } catch (SQLException ex) {
+
+        }
     }
-    
+
+    private void montarTabela() {
+        int linha = 0;
+        try {
+            while (rsListar.next()) {
+                String id_dpto = rsListar.getString("id_dpto");
+                String nome_dpto = rsListar.getString("nome_dpto");
+                jTableDpto.getModel().setValueAt(id_dpto, linha, 0);
+                jTableDpto.getModel().setValueAt(nome_dpto, linha, 1);
+                linha++;
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Error " + ex.getMessage());
+        }
+    }
+
+    private void iniciarBD() {
+        try {
+            con = ConexaoFactory.getConnection();
+            stmtListar = con.createStatement();
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Error " + ex.getMessage());
+        }
+    }
+
+    private void liberarcampos() {
+
+    }
+
     public void lookandfell() {
         try {
 
@@ -285,10 +403,14 @@ public class JDCadDepartamento extends javax.swing.JDialog {
     private javax.swing.JButton jButtonAtualizar;
     private javax.swing.JButton jButtonEditar;
     private javax.swing.JButton jButtonLimpar;
+    private javax.swing.JButton jButtonListar;
     private javax.swing.JButton jButtonNovo;
     private javax.swing.JButton jButtonSair;
     private javax.swing.JButton jButtonSalvar;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanelDpto;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTableDpto;
     private javax.swing.JTextField jTextFieldNomeDepto;
     // End of variables declaration//GEN-END:variables
 }
